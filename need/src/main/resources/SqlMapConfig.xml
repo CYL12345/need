@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 加载properties文件 -->
+	<properties resource="jdbc.properties">
+		<property name="jdbc.password" value="12345"/>
+	</properties>
+	<!-- 设置全局参数，名值对设置 -->
+	<settings>
+		<!-- 开启延迟加载的功能
+			lazyLoadingEnabled：延迟加载是否启用，默认值为false
+			aggressiveLazyLoading：积极的延迟加载，默认值为true
+				设置为false，属性按需加载 -->
+		
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 开启二级缓存,总开关 -->
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+	<!-- 自定义别名 
+		type:x需要定义别名的全类名
+		alias:别名
+		
+		typeAlias:使用单标签
+		-->
+	<typeAliases>
+		<!-- <typeAlias type="com.jxd.domain.User" alias="user"/>
+		 -->
+		<!-- 
+			给指定包下的类定义别名，批量定义
+			别名是类名，首字母大小写都可以
+		 -->
+		<package name="com.jxd.domain"/>
+	</typeAliases>
+	
+	<!-- 配置mybatis环境 -->
+	<environments default="development">
+		<environment id="development">
+			<!-- 配置事务管理，由mybatis控制 -->
+			<transactionManager type="JDBC" />
+			<!-- 配置数据源,连接池 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 加载映射文件 
+	
+		resource：映射文件的响度路径
+		url:映射文件的绝对路径名称
+		
+		class：加载mapper映射文件，指定mapper接口的全类名
+		<package>:加载指定包下的mapper映射文件
+	-->
+	<mappers>
+		<package name="com.jxd.mapper"/>
+	</mappers>
+	
+</configuration>

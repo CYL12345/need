@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.BillingFileMapper" >
+  <resultMap id="BaseResultMap" type="com.model.BillingFile" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="billing_file_Vendor" property="billingFileVendor" jdbcType="VARCHAR" />
+    <result column="billing_file_GEO" property="billingFileGeo" jdbcType="VARCHAR" />
+    <result column="billing_file" property="billingFile" jdbcType="VARCHAR" />
+    <result column="billing_file_state" property="billingFileState" jdbcType="VARCHAR" />
+    <result column="billing_number" property="billingNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, billing_file_Vendor, billing_file_GEO, billing_file, billing_file_state, billing_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from billing_file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from billing_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.BillingFile" >
+    insert into billing_file (id, billing_file_Vendor, billing_file_GEO, 
+      billing_file, billing_file_state, billing_number
+      )
+    values (#{id,jdbcType=INTEGER}, #{billingFileVendor,jdbcType=VARCHAR}, #{billingFileGeo,jdbcType=VARCHAR}, 
+      #{billingFile,jdbcType=VARCHAR}, #{billingFileState,jdbcType=VARCHAR}, #{billingNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.BillingFile" >
+    insert into billing_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="billingFileVendor != null" >
+        billing_file_Vendor,
+      </if>
+      <if test="billingFileGeo != null" >
+        billing_file_GEO,
+      </if>
+      <if test="billingFile != null" >
+        billing_file,
+      </if>
+      <if test="billingFileState != null" >
+        billing_file_state,
+      </if>
+      <if test="billingNumber != null" >
+        billing_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="billingFileVendor != null" >
+        #{billingFileVendor,jdbcType=VARCHAR},
+      </if>
+      <if test="billingFileGeo != null" >
+        #{billingFileGeo,jdbcType=VARCHAR},
+      </if>
+      <if test="billingFile != null" >
+        #{billingFile,jdbcType=VARCHAR},
+      </if>
+      <if test="billingFileState != null" >
+        #{billingFileState,jdbcType=VARCHAR},
+      </if>
+      <if test="billingNumber != null" >
+        #{billingNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.BillingFile" >
+    update billing_file
+    <set >
+      <if test="billingFileVendor != null" >
+        billing_file_Vendor = #{billingFileVendor,jdbcType=VARCHAR},
+      </if>
+      <if test="billingFileGeo != null" >
+        billing_file_GEO = #{billingFileGeo,jdbcType=VARCHAR},
+      </if>
+      <if test="billingFile != null" >
+        billing_file = #{billingFile,jdbcType=VARCHAR},
+      </if>
+      <if test="billingFileState != null" >
+        billing_file_state = #{billingFileState,jdbcType=VARCHAR},
+      </if>
+      <if test="billingNumber != null" >
+        billing_number = #{billingNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.BillingFile" >
+    update billing_file
+    set billing_file_Vendor = #{billingFileVendor,jdbcType=VARCHAR},
+      billing_file_GEO = #{billingFileGeo,jdbcType=VARCHAR},
+      billing_file = #{billingFile,jdbcType=VARCHAR},
+      billing_file_state = #{billingFileState,jdbcType=VARCHAR},
+      billing_number = #{billingNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
